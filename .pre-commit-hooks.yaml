@@ -1,0 +1,29 @@
+- id: check-message
+  name: check commit message
+  description: ensures commit message to match regex
+  entry: commit-check
+  args: [--message]
+  pass_filenames: true
+  language: python
+  stages: [commit-msg]
+- id: check-branch
+  name: check branch name
+  description: ensures branch name to match regex
+  entry: commit-check
+  args: [--branch]
+  pass_filenames: false
+  language: python
+- id: check-author-name
+  name: check committer name
+  description: ensures committer name to match regex
+  entry: commit-check
+  args: [--author-name]
+  pass_filenames: false
+  language: python
+- id: check-author-email
+  name: check committer email
+  description: ensures committer email to match regex
+  entry: commit-check
+  args: [--author-email]
+  pass_filenames: false
+  language: python
