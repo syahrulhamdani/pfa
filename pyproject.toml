@@ -1,0 +1,21 @@
+[project]
+name = "personal-finance-assistant"
+version = "0.0.1"
+description = "My Personal Finance Assistant"
+authors = [
+    {name = "syahrulhamdani",email = "23093968+syahrulhamdani@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.9"
+ruff = "^0.14.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
