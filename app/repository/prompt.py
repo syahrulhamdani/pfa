@@ -104,3 +104,28 @@ async def get_text_to_sql_prompt(
             question=question,
         )
     return prompt
+
+
+async def get_pfa_planner_prompt(
+    budget_rules: str,
+    current_spending: str,
+    transaction_data: str,
+    spending_threshold: str,
+) -> str:
+    """PFA planner prompt agent.
+
+    Args:
+        budget_rules (str): Rules for budgeting.
+        current_spending (str): Current monthly spending.
+        transaction_data (str): Transaction data to analyze.
+        spending_threshold (str): Spending threshold.
+    """
+    prompt: BasePromptTemplate = await _hub.get_prompt("pfa-planner")
+    if isinstance(prompt, BasePromptTemplate):
+        return prompt.format(
+            budget_rules=budget_rules,
+            current_spending=current_spending,
+            transaction_data=transaction_data,
+            spending_threshold=spending_threshold,
+        )
+    return prompt
