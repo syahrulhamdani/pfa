@@ -40,6 +40,8 @@ class GCPSettings(BaseSettings):
     GOOGLE_CSE_API_KEY: str = os.getenv("GOOGLE_CSE_API_KEY", "")
     GOOGLE_CSE_TIMEOUT: int = int(os.getenv("GOOGLE_CSE_TIMEOUT", "10"))
 
+    GCS_BUCKET_ID: str = os.getenv("GCS_BUCKET_ID", "pfa-agents")
+
 
 class Settings(AppSettings, LangsmithSettings, MCPSettings, GCPSettings):
     """Base configurations."""
