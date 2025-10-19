@@ -21,7 +21,7 @@ class Storage:
             setattr(self, "_bucket", client.get_bucket(self.bucket_id))
         return getattr(self, "_bucket")
 
-    def get(self, blob_name: str) -> str:
+    def get(self, blob_name: str, path: str = None, ext: str = None) -> str:
         """Get a blob from Google Cloud Storage.
 
         Args:
@@ -30,10 +30,14 @@ class Storage:
         Returns:
             str: blob content.
         """
-        _LOGGER.info("Downloading blob: {blob_name}")
+        _LOGGER.info("Downloading blob: {}", blob_name)
+        if path:
+            blob_name = f"{path}/{blob_name}"
+        if ext:
+            blob_name = f"{blob_name}.{ext}"
         blob = self.bucket.blob(blob_name)
         content = blob.download_as_bytes().decode("utf-8")
-        _LOGGER.info("Successfully downloaded blob: {blob_name}")
+        _LOGGER.info("Successfully downloaded blob: {}", blob_name)
         return content
 
     def get_all_blobs(self, match_glob: str) -> list[storage.blob.Blob]:

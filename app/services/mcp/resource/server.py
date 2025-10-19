@@ -24,8 +24,7 @@ async def get_planner_input(input_name: str) -> str:
     Returns:
         str: input content.
     """
-    blob_name = input_name + ".json"
-    content = await asyncio.to_thread(_gcs.get, blob_name)
+    content = await asyncio.to_thread(_gcs.get, input_name, "mcp/resource", "json")
     return content
 
 
