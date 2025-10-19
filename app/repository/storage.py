@@ -1,11 +1,8 @@
 """Repository layer for Google Cloud Storage."""
-import asyncio
 from dataclasses import dataclass
 
 from google.cloud import storage
 from loguru import logger as _LOGGER
-
-from app.core.config import config as c
 
 
 @dataclass
@@ -51,6 +48,3 @@ class Storage:
             content = blob.download_as_bytes().decode("utf-8")
             blobs.append(content)
         return blobs
-
-
-_gcs = Storage(bucket_id=c.GCS_BUCKET_ID)
