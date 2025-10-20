@@ -12,7 +12,7 @@ from app.services.mcp.prompts import (get_extraction_prompt,
                                       get_text_to_sql_prompt)
 from app.services.mcp.resources import get_planner_input
 
-mcp = FastMCP(name="PersonalFinanceAssistantService")
+mcp = FastMCP(name="PersonalFinanceAssistantService", stateless_http=True)
 
 # Prompts
 mcp.prompt(
@@ -44,7 +44,7 @@ mcp.resource(
 )(get_planner_input)
 
 # HTTP server
-mcp_app = mcp.http_app(path=c.MCP_API_PREFIX, transport=c.MCP_TRANSPORT)
+mcp_app = mcp.streamable_http_app(path=c.MCP_API_PREFIX)
 app = FastAPI(
     title="MCP Server for Personal Finance Assistant",
     lifespan=mcp_app.lifespan,
