@@ -10,6 +10,9 @@ def to_bool(value: str) -> bool:
 
 class MCPSettings(BaseSettings):
     """MCP configurations."""
+    MCP_API_PREFIX: str = os.getenv("MCP_API_PREFIX", "/api/mcp")
+    MCP_VERSION: str = os.getenv("MCP_VERSION", "v1")
+    MCP_TRANSPORT: str = os.getenv("MCP_TRANSPORT", "http")
     MCP_REMOTE_HOST_URL: str = os.getenv("MCP_REMOTE_HOST_URL", "http://localhost")
     MCP_REMOTE_HOST_PORT: int = int(os.getenv("MCP_REMOTE_HOST_PORT", "7001"))
 
