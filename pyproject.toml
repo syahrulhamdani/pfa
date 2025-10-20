@@ -19,6 +19,7 @@ dependencies = [
     "xmltodict (>=1.0.2,<1.1.0)",
     "beautifulsoup4[lxml] (>=4.14.2,<4.15.0)",
     "html2text (>=2025.4.15,<2025.5.0)",
+    "gunicorn (>=23.0.0,<23.1.0)",
 ]
 
 [tool.poetry]
