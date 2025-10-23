@@ -22,6 +22,16 @@ dependencies = [
     "gunicorn (>=23.0.0,<23.1.0)",
 ]
 
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["PLE", "PLC", "PLR", "I"]
+
+[tool.ruff.lint.pylint]
+allow-magic-value-types = ["str", "bytes", "int"]
+max-args = 10
+
 [tool.poetry]
 
 [tool.poetry.group.dev.dependencies]
