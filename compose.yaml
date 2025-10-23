@@ -1,0 +1,19 @@
+name: pfa-agent
+
+services:
+  mcp:
+    build:
+      dockerfile: Containerfile
+    image: syhamdani/pfa-agent
+    ports:
+      - 7001:7001
+    env_file:
+      - dev.env
+    restart: unless-stopped
+    secrets:
+      - pfa-credentials
+
+
+secrets:
+  pfa-credentials:
+    file: ./secrets/pfa-agent.json
