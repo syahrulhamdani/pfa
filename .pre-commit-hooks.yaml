@@ -10,7 +10,7 @@
   name: check branch name
   description: ensures branch name to match regex
   entry: commit-check
-  args: [--branch]
+  args: [--branch -c .commit-check.yaml]
   pass_filenames: false
   language: python
 - id: check-author-name

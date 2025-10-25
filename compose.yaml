@@ -8,7 +8,7 @@ services:
     ports:
       - 7001:7001
     env_file:
-      - dev.env
+      - mcp.env
     restart: unless-stopped
     secrets:
       - pfa-credentials
