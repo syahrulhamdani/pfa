@@ -1,4 +1,5 @@
 import os
+from typing import Literal
 
 from pydantic_settings import BaseSettings
 
@@ -6,6 +7,23 @@ from pydantic_settings import BaseSettings
 def to_bool(value: str) -> bool:
     """Convert string to boolean representations."""
     return value.lower() in ("true", "yes", "y", "1")
+
+
+class AgentSettings(BaseSettings):
+    """ADK Agents configurations."""
+    AGENT_DB_USER: str = os.getenv("AGENT_DB_USER", "pfa")
+    AGENT_DB_PASSWORD: str = os.getenv("AGENT_DB_PASSWORD", "pfa")
+    AGENT_DB_NAME: str = os.getenv("AGENT_DB_NAME", "pfa")
+    AGENT_DB_HOST: str = os.getenv("AGENT_DB_HOST", "localhost")
+    AGENT_DB_PORT: int = int(os.getenv("AGENT_DB_PORT", "5432"))
+    AGENT_DB_PROVIDER: Literal["postgresql", "mysql"] = os.getenv(
+        "AGENT_DB_PROVIDER", "postgresql"
+    )
+    AGENT_SESSION_SERVICE_URI: str = (
+        f"{AGENT_DB_PROVIDER}+psycopg://{AGENT_DB_USER}:{AGENT_DB_PASSWORD}@"
+        f"{AGENT_DB_HOST}:{AGENT_DB_PORT}/{AGENT_DB_NAME}"
+    )
+    AGENT_SERVE_WEB: bool = to_bool(os.getenv("AGENT_SERVE_WEB", "false"))
 
 
 class MCPSettings(BaseSettings):
@@ -46,7 +64,7 @@ class GCPSettings(BaseSettings):
     GCS_BUCKET_ID: str = os.getenv("GCS_BUCKET_ID", "pfa-agents")
 
 
-class Settings(AppSettings, LangsmithSettings, MCPSettings, GCPSettings):
+class Settings(AppSettings, LangsmithSettings, MCPSettings, GCPSettings, AgentSettings):
     """Base configurations."""
     HTTP_MAX_CONNECTIONS: int = int(os.getenv("HTTP_MAX_CONNECTIONS", "5"))
     HTTP_MAX_RETRIES: int = int(os.getenv("HTTP_MAX_RETRIES", "3"))

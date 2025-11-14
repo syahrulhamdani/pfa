@@ -12,8 +12,26 @@ services:
     restart: unless-stopped
     secrets:
       - pfa-credentials
+  memory:
+    image: postgres:17.6
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pfa
+      POSTGRES_USER: pfa
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg-password
+    ports:
+      - 5454:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "pfa"]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+    secrets:
+      - pg-password
 
 
 secrets:
   pfa-credentials:
     file: ./secrets/pfa-agent.json
+  pg-password:
+    file: ./secrets/pg-password.txt
